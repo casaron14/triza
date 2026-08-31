@@ -1,0 +1,470 @@
+/* =========================================================
+   Triza Maleko — one-page portfolio
+   Built to implementation.md design spec (photographer style)
+   ========================================================= */
+
+:root {
+  /* Core palette — deliberately monochrome. No accent color: contrast comes
+     from the photograph and from ink-vs-paper value, not from hue. */
+  --color-bg: #D0C9C3;
+  /* warm greige, main background */
+  --color-bg-deep: #C6BEB6;
+  /* one step darker, footer/section alternation */
+  --color-panel: #E7E9EA;
+  /* cool light gray, photo backdrop / image mattes */
+  --color-ink: #1A1613;
+  /* near-black, warm — hero type, buttons, primary text */
+  --color-ink-soft: #58534E;
+  /* muted warm gray — body paragraphs, AA on --color-bg (4.6:1) */
+  --color-button-text: #EFEBE6;
+  /* off-white text on dark pill buttons */
+  --color-line: rgba(26, 22, 19, 0.14);
+  /* hairline dividers on --color-bg */
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-sm: 12px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-base: 500ms;
+
+  /* Shadows */
+  --shadow-soft: 0 20px 50px -20px rgba(26, 22, 19, 0.35);
+  --shadow-icon: 0 8px 24px -10px rgba(26, 22, 19, 0.3);
+
+  /* Typography */
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+
+  /* Body scale */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1rem;
+
+  /* Spacing — 4px base unit */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --page-gutter: clamp(1.25rem, 5vw, 3rem);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.ico {
+  flex-shrink: 0;
+}
+
+/* ===== Header ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(208, 201, 195, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: var(--space-3) var(--page-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.wordmark {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-base);
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.wordmark-accent {
+  color: var(--color-ink-soft);
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-line);
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--color-ink);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  transition: background var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.btn-download:hover {
+  background: var(--color-ink);
+  color: var(--color-button-text);
+  transform: translateY(-1px);
+}
+
+/* ===== Hero ===== */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "name"
+    "photo"
+    "intro"
+    "btn"
+    "contacts";
+  row-gap: var(--space-4);
+  min-height: 100svh;
+}
+
+.hero-name,
+.hero-photo,
+.hero-intro,
+.btn-pill {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.hero-name {
+  padding-top: var(--space-5);
+}
+
+.hero-name {
+  grid-area: name;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  font-size: clamp(2.75rem, 12vw, 6.5rem);
+  color: var(--color-ink);
+}
+
+.hero-photo {
+  grid-area: photo;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-intro {
+  grid-area: intro;
+  max-width: 42ch;
+  color: var(--color-ink-soft);
+}
+
+/* ===== CTA pill ===== */
+.btn-pill {
+  grid-area: btn;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  gap: var(--space-3);
+  width: fit-content;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-button-text);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-icon);
+  transition: transform var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+}
+
+.btn-pill:hover {
+  transform: translateY(-2px);
+  background: #000;
+}
+
+.btn-pill:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* ===== Contacts panel ===== */
+.contacts {
+  grid-area: contacts;
+  padding: var(--space-5) var(--page-gutter) var(--space-6);
+  background: linear-gradient(180deg, transparent, var(--color-bg-deep));
+}
+
+.contacts .section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.contacts .section-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-4);
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-panel);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  box-shadow: var(--shadow-icon);
+  transition: transform var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  background: var(--color-ink);
+  color: var(--color-button-text);
+}
+
+/* ===== Footer ===== */
+.contact {
+  padding: var(--space-5) var(--page-gutter);
+  background: var(--color-bg-deep);
+}
+
+.contact-footer {
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+  text-align: center;
+}
+
+/* ===== Load / reveal animation ===== */
+.rise {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+/* ===== Responsive: desktop split-screen ===== */
+@media (min-width: 960px) {
+  body {
+    background: radial-gradient(1200px 800px at 80% -10%, #E4DED7 0%, var(--color-bg) 45%);
+  }
+
+  /* Header — roomier and more refined on desktop */
+  .site-header {
+    padding: var(--space-3) var(--page-gutter);
+    background: rgba(208, 201, 195, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .wordmark {
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-download {
+    padding: 0.65rem 1.25rem;
+    font-size: var(--text-base);
+    background: transparent;
+    transition: background var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  .btn-download:hover {
+    background: var(--color-ink);
+    color: var(--color-button-text);
+    border-color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+
+  .hero {
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-areas:
+      "name  photo"
+      "intro photo"
+      "btn   photo"
+      "contacts contacts";
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    min-height: calc(100svh - 76px);
+    padding: clamp(3rem, 8vh, 6rem) var(--page-gutter);
+  }
+
+  .hero-name,
+  .hero-intro,
+  .btn-pill {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-name {
+    font-size: clamp(4.5rem, 8vw, 8.5rem);
+    line-height: 0.84;
+  }
+
+  .hero-intro {
+    max-width: 40ch;
+    font-size: clamp(1.25rem, 1.4vw, 1.6rem);
+    line-height: 1.6;
+    align-self: justify;
+  }
+
+  .btn-pill {
+    justify-self: center;
+    font-size: clamp(1rem, 1.1vw, 1.15rem);
+    padding: 1.1rem 2.5rem;
+  }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    justify-self: center;
+  }
+
+  .hero-photo img {
+    transition: transform 1.2s var(--ease-out);
+    will-change: transform;
+  }
+
+  .hero-photo:hover img {
+    transform: scale(1.04);
+  }
+
+  /* Contacts full-width band below the split */
+  .contacts {
+    grid-area: contacts;
+    border-top: 1px solid var(--color-line);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+    padding: var(--space-6) var(--page-gutter) 0;
+    margin-top: var(--space-6);
+  }
+
+  .contacts .section-title {
+    font-size: clamp(2rem, 3vw, 3.25rem);
+    margin-bottom: var(--space-1);
+  }
+
+  .contacts .section-subtitle {
+    font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .social-list {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .social-link {
+    padding: 0.9rem 1.75rem;
+    font-size: clamp(1rem, 1.1vw, 1.15rem);
+    background: rgba(255, 255, 255, 0.5);
+    justify-content: center;
+    transition: transform var(--dur-base) var(--ease-out),
+      background var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out);
+  }
+
+  .social-link:hover {
+    transform: translateY(-3px);
+    background: var(--color-ink);
+    color: var(--color-button-text);
+  }
+
+  /* Footer */
+  .contact {
+    padding: var(--space-5) var(--page-gutter);
+  }
+
+  .contact-footer {
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise {
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
