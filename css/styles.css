@@ -380,7 +380,7 @@ a:focus-visible {
   .hero-photo {
     width: 100%;
     max-width: 460px;
-    height: auto;
+    height: 460px;
     aspect-ratio: 4 / 5;
     justify-self: center;
   }
