@@ -177,7 +177,7 @@ a:focus-visible {
 
 .hero-photo {
   grid-area: photo;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 
@@ -185,6 +185,7 @@ a:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
 .hero-intro {
@@ -315,13 +316,13 @@ a:focus-visible {
   }
 
   .wordmark {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.01em;
   }
 
   .btn-download {
     padding: 0.65rem 1.25rem;
-    font-size: var(--text-base);
+    font-size: 1.1rem;
     background: transparent;
     transition: background var(--dur-base) var(--ease-out),
       color var(--dur-base) var(--ease-out),
@@ -380,8 +381,8 @@ a:focus-visible {
   .hero-photo {
     width: 100%;
     max-width: 460px;
-    height: 460px;
-    aspect-ratio: 4 / 5;
+    height: auto;
+    aspect-ratio: 1 / 1;
     justify-self: center;
   }
 
@@ -414,7 +415,7 @@ a:focus-visible {
   }
 
   .contacts .section-subtitle {
-    font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+    font-size: clamp(1.15rem, 1.4vw, 1.4rem);
     margin-bottom: var(--space-4);
   }
 
@@ -447,6 +448,7 @@ a:focus-visible {
   }
 
   .contact-footer {
+    font-size: 0.95rem;
     letter-spacing: 0.02em;
   }
 }
